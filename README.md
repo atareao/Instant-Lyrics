@@ -11,7 +11,40 @@ A linux application with a very convinient GUI. Build with Python Gtk+3 (gi).
 ### GIF
 ![working](https://cloud.githubusercontent.com/assets/6123105/23824730/e0e0829e-06a1-11e7-8d57-3235c4266f2c.gif)
 
-# Requirements
+
+# Compatibility
+
+* Python 2/3
+
+* Linux
+
+
+# Installation
+You can either download an [AppImage](http://appimage.org/) or install from source.
+
+## AppImage
+
+AppImage runs on most of the Linux distros.
+
+1. Download the `.AppImage` file of the latest version from the [releases](https://github.com/bhrigu123/Instant-Lyrics/releases)
+
+2. Make the file executable (two ways):
+    
+    * Open terminal. Go to the directory of the downloaded AppImage file. Run the command:
+        `chmod a+x filename.AppImage`. (where `filename` is your downloaded AppImage)
+
+    * Or you can also use GUI: ([see this](http://discourse.appimage.org/t/how-to-make-an-appimage-executable/80))
+
+3. Run the file by double-clicking it. (or from terminal using the command: `./filename.AppImage`)
+
+4. The first time you run it, it will ask you to integrate the file with system. Click `Yes`. This will create a desktop entry in you Applications list, and you can start the app from your Applications also.
+
+
+## From Source
+
+To install from source, you will need to install the required dependencies first (shown below):
+
+### Requirements
 
 * python-gi (PyGObject)
 
@@ -25,49 +58,52 @@ A linux application with a very convinient GUI. Build with Python Gtk+3 (gi).
 
 * lxml
 
-Works with Python 2/3. Shown below is installation and running with Python 2.
 
-To install `python-dbus`, `appindicator3` and `python-gi`, you will need to install using your package manager.
-
-Whereas `requests`, `beautifulsoup4` and `lxml` can be installed from `pip` also. 
+Shown below is installation and running with Python 2.
 
 ### For Ubuntu/Debian based systems:
 
-`sudo apt install python-gi python-dbus gir1.2-appindicator3-0.1 `
+``` sh
+sudo apt install python-gi python-dbus gir1.2-appindicator3-0.1
+```
 
-`pip install requests beautifulsoup4 lxml`
+``` sh
+sudo apt install python-requests python-bs4 python-lxml
+```
+
+(requests, lxml and bs4 can be install from `pip` also: `pip install requests lxml beautifiulsoup4`)
 
 ### For Arch users
 
-`sudo pacman -S python2-dbus python2-requests python2-lxml python2-beautifulsoup4`
+``` sh
+sudo pacman -S python2-dbus python2-requests python2-lxml python2-beautifulsoup4 python2-gobject libappindicator-gtk3
+```
 
-`sudo pacman -S python2-gobject libappindicator-gtk3`
+### Fedora
 
-### Fedora (not tested yet)
-`sudo dnf install pygobject3 python-gobject`
+``` sh
+sudo dnf install dbus-python python-gobject libappindicator-gtk3 python2-requests python-beautifulsoup4 python2-lxml
+```
 
-`sudo yum install libappindicator-gtk3`
+## Install from source
 
-`pip install requests beautifulsoup4 lxml`
-<br>
+After you've installed the dependencies, open terminal and go to the directory where you want to install. Enter the commands:
 
+``` sh
+git clone https://github.com/bhrigu123/Instant-Lyrics.git
 
-# Installation
+cd Instant-Lyrics/
 
-## From source
-
-1. Clone the repository. `git clone https://github.com/bhrigu123/Instant-Lyrics.git`
-
-2. `cd Instant-Lyrics/`
-
-3. Run the command `python InstantLyrics.py`
+python InstantLyrics.py
+```
 
 The icon will appear in the system tray (indicator panel). You can start using the application from there.
 
+<br>
 
 # Creating a launcher shortcut
 
-You can either use the application from the terminal, or create a launcher shortcut, which will add the application in your launcher menu:
+If you have installed from source, you can either use the application from the terminal, or create a launcher shortcut (which will add the application in your launcher menu):
 
 ![Launcher](https://cloud.githubusercontent.com/assets/6123105/23824317/4735e83e-069a-11e7-8b1e-2814632bb3aa.jpeg)
 
@@ -90,14 +126,14 @@ Exec=python [path of python file]
 Terminal=false
 ```
 
-Replace `[path of icon]` with the complete path of the icon. The icon is named `icon.svg` inside the root directory of the repository.
+Replace `[path of icon]` with the complete path of the icon. The icon is present in `icons/instant-lyrics.svg` inside the root directory of the repository.
 
 Replace `[path of python file]` with the complete path of the file `InstantLyrics.py` which is also in the root directory of the repo.
 
 These two lines should look something like:
 
 ```
-Icon=/home/ubuntu/Instant-Lyrics/icon.svg
+Icon=/home/ubuntu/Instant-Lyrics/icons/instant-lyrics.svg
 Exec=python /home/ubuntu/Instant-Lyrics/InstantLyrics.py
 ```
 
