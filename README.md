@@ -86,7 +86,7 @@ sudo dnf install dbus-python python-gobject libappindicator-gtk3 python2-request
 After you've installed the dependencies, open terminal and go to the directory where you want to install. Enter the commands:
 
 ``` sh
-git clone https://github.com/bhrigu123/Instant-Lyrics.git
+git clone https://github.com/kazemnejad/Instant-Lyrics.git
 
 cd Instant-Lyrics/
 
