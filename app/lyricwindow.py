@@ -256,7 +256,7 @@ class Toolbar(Gtk.HeaderBar):
         return btn_search
 
     def _create_spotify_btn(self):
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size('resources/spotify-logo-symbolic.svg', 16, 16)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(get_icon_path('resources/spotify-logo-symbolic.svg'), 16, 16)
         Gtk.IconTheme.add_builtin_icon("spotify-logo-symbolic", -1, pixbuf)
 
         btn_spotify = Gtk.ToggleButton()
@@ -279,7 +279,7 @@ class ToolbarInfo(Gtk.Bin):
         super(ToolbarInfo, self).__init__(**properties)
 
         builder = Gtk.Builder()
-        builder.add_from_file('ui/ToolbarInfo.ui')
+        builder.add_from_file(get_icon_path('ui/ToolbarInfo.ui'))
 
         self.infobox = builder.get_object('info')
         self.add(self.infobox)

@@ -88,9 +88,9 @@ After you've installed the dependencies, open terminal and go to the directory w
 ``` sh
 git clone https://github.com/kazemnejad/Instant-Lyrics.git
 
-cd Instant-Lyrics/app
+cd Instant-Lyrics/
 
-python main.py
+python instantlyric.py
 ```
 
 The icon will appear in the system tray (indicator panel). You can start using the application from there.
