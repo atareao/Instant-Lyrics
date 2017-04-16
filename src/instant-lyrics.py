@@ -1,15 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('AppIndicator3', '0.1')
+try:
+    gi.require_version('Gtk', '3.0')
+    gi.require_version('AppIndicator3', '0.1')
+except Exception as e:
+    print(e)
+    exit(-1)
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Gtk
 
 import signal
 import threading
 
-from src.windows import LyricsWindow, PreferenceWindow
-from . import utils
-from src.settings import APPINDICATOR_ID, CONFIG_PATH
+from windows import LyricsWindow, PreferenceWindow
+import utils
+import comun
 
 
 class AppIndicator():
@@ -17,8 +24,10 @@ class AppIndicator():
     def __init__(self):
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-        indicator = appindicator.Indicator.new(APPINDICATOR_ID, utils.get_icon_path(
-            '../icons/instant-lyrics-24.png'), appindicator.IndicatorCategory.SYSTEM_SERVICES)
+        indicator = appindicator.Indicator.new(
+            comun.APPINDICATOR_ID,
+            comun.ICON,
+            appindicator.IndicatorCategory.SYSTEM_SERVICES)
         indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
         indicator.set_menu(self.build_menu())
 
@@ -48,7 +57,7 @@ class AppIndicator():
         return menu
 
     def fetch_lyrics(self, source):
-        win = LyricsWindow("get", self)
+        LyricsWindow("get", self)
 
     def spotify_lyrics(self, source):
         win = LyricsWindow("spotify", self)
@@ -57,7 +66,11 @@ class AppIndicator():
         thread.start()
 
     def preferences(self, source):
-        win = PreferenceWindow(self)
+        PreferenceWindow(self)
 
     def quit(self, source):
         Gtk.main_quit()
+
+
+if __name__ == '__main__':
+    app = AppIndicator()

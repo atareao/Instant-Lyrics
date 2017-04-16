@@ -1,35 +1,38 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import gi
-gi.require_version('Gtk', '3.0')
+try:
+    gi.require_version('Gtk', '3.0')
+except Exception as e:
+    print(e)
+    exit(-1)
 from gi.repository import Gtk, Gdk
 
 import dbus
 import threading
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
+from lyrics import get_lyrics
+from comun import CONFIG_PATH
+import comun
+import utils
 
-from src.lyrics import get_lyrics
-from src.settings import CONFIG_PATH
-from . import utils
 
 class LyricsWindow(Gtk.Window):
 
     def __init__(self, type, app):
         Gtk.Window.__init__(self, title="Lyrics")
-        self.set_icon_from_file(
-                    utils.get_icon_path('../icons/instant-lyrics-32.png'))
+        self.set_icon_from_file(comun.ICON)
         self.set_border_width(20)
         self.set_default_size(
-                            int(app.Config.get('Main', 'window width')), 
-                            int(app.Config.get('Main', 'window height')))
+            int(app.Config.get('Main', 'window width')),
+            int(app.Config.get('Main', 'window height')))
         self.set_position(Gtk.WindowPosition.CENTER)
 
         self.main_box = Gtk.Box(
             orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.main_box.set_size_request(
-                            int(app.Config.get('Main', 'window width')), 
-                            int(app.Config.get('Main', 'window height')))
+            int(app.Config.get('Main', 'window width')),
+            int(app.Config.get('Main', 'window height')))
 
         if(type == "get"):
             entry_hbox = self.create_input_box()
@@ -150,7 +153,7 @@ class PreferenceWindow(Gtk.Window):
 
     def __init__(self, app):
         Gtk.Window.__init__(self, title="Instant-Lyrics Prefenreces")
-        self.set_icon_from_file(utils.get_icon_path('../icons/instant-lyrics-32.png'))
+        self.set_icon_from_file(comun.ICON)
         self.set_border_width(20)
         #self.set_default_size(350, 550)
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -172,13 +175,9 @@ class PreferenceWindow(Gtk.Window):
         button_hbox.pack_start(reset, True, True, 0)
         button_hbox.pack_start(self.save, True, True, 0)
 
-        desktop_entry = Gtk.Button.new_with_label("Create Desktop Entry")
-        desktop_entry.connect("clicked", self.create_desktop_entry)
-
         self.message = Gtk.Label()
 
         self.main_box.pack_start(button_hbox, False, False, 0)
-        self.main_box.pack_start(desktop_entry, True, True, 0)
         self.main_box.pack_start(self.message, True, True, 0)
 
         self.add(self.main_box)
@@ -270,17 +269,6 @@ class PreferenceWindow(Gtk.Window):
         self.width_val.set_text(app.Config.get('Main', 'window width'))
         self.height_val.set_text(app.Config.get('Main', 'window height'))
         self.save.set_sensitive(False)
-
-    def create_desktop_entry(self, source):
-        utils.create_desktop_entry()
-        msg = ("Desktop entry created. You can now start the\n" 
-                "application from your Applications Launcher.\n\n"
-                "<small>If you ever change the location "
-                "of the Instant-Lyrics\nfolder, you will "
-                "need to create the Desktop Entry\nfrom "
-                "here again.</small>")
-
-        self.show_message(msg)
 
     def show_message(self, msg):
         self.message.set_markup(msg)

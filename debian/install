@@ -1,0 +1,4 @@
+src/*.py /opt/extras.ubuntu.com/instant-lyrics/share/instant-lyrics
+data/icons/instant-lyrics.svg /opt/extras.ubuntu.com/instant-lyrics/share/icons
+data/instant-lyrics.desktop /usr/share/applications
+data/instant-lyrics-autostart.desktop /opt/extras.ubuntu.com/instant-lyrics/share/instant-lyrics

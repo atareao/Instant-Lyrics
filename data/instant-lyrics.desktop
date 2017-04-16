@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Instant Lyrics
+GenericName=Instant Lyrics
+Comment=Instant Lyrics
+Exec=/opt/extras.ubuntu.com/instant-lyrics/share/instant-lyrics/instant-lyrics.py
+Icon=/opt/extras.ubuntu.com/instant-lyrics/share/icons/instant-lyrics.svg
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Utility;
+X-Ubuntu-Gettext-Domain=instant-lyrics
+Name[es_ES]=instant-lyrics.desktop
