@@ -11,7 +11,7 @@ Architecture: all
 Depends: ${misc:Depends}, ${python:Depends},
     python3,
     python3-gi,
-    gir1.2-gtk-3.0
+    gir1.2-gtk-3.0,
     python3-lxml,
     python3-requests
 Description: Instantly fetches the lyrics of the currently of any song
