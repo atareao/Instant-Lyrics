@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import logging
 import threading
 
@@ -22,7 +24,8 @@ class PeriodicThread(object):
         """
         Mimics Thread standard start method
         """
-        # self.first_thread = threading.Thread(None, self._first_run, self.name, *self.args, **self.kwargs)
+        # self.first_thread = threading.Thread(None, self._first_run,
+        # self.name, *self.args, **self.kwargs)
         # self.first_thread.start()
         self.schedule_timer()
 
@@ -35,11 +38,13 @@ class PeriodicThread(object):
 
     def _run(self):
         """
-        Run desired callback and then reschedule Timer (if thread is not stopped)
+        Run desired callback and then reschedule Timer
+        (if thread is not stopped)
         """
         try:
             self.run()
-        except Exception, e:
+        except Exception as e:
+            print(e)
             logging.exception("Exception in running periodic thread")
         finally:
             with self.schedule_lock:
@@ -50,7 +55,8 @@ class PeriodicThread(object):
         """
         Schedules next Timer run
         """
-        self.current_timer = threading.Timer(self.period, self._run, *self.args, **self.kwargs)
+        self.current_timer = threading.Timer(
+            self.period, self._run, *self.args, **self.kwargs)
         if self.name:
             self.current_timer.name = self.name
 
@@ -76,7 +82,7 @@ class PeriodicThread(object):
         self.current_timer.join()
 
     def isAlive(self):
-        return (
-                   self.first_thread is not None and self.first_thread.isAlive()) or (
-                   self.current_timer is not None and self.current_timer.isAlive()
-               )
+        return (self.first_thread is not None and
+                self.first_thread.isAlive()) or (
+                    self.current_timer is not None and
+                    self.current_timer.isAlive())

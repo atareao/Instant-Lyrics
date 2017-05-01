@@ -1,5 +1,11 @@
-instant-lyrics (0.1.0-0extras16.04.1) xenial; urgency=medium
+instant-lyrics (0.2.0-0extras16.04.0) xenial; urgency=medium
+
+  * Instant updates
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 01 May 2017 07:48:34 +0200
+
+instant-lyrics (0.1.0-0extras16.04.2) xenial; urgency=medium
 
   * First release
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 17 Apr 2017 07:14:32 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 17 Apr 2017 07:53:32 +0200

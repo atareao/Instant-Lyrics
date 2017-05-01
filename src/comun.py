@@ -39,6 +39,7 @@ if is_package():
     ICONDIR = os.path.join(ROOTDIR, 'share/icons')
     AUTOSTART = os.path.join(APPDIR,
                              'instant-lyrics-autostart.desktop')
+    UIDIR = os.path.join(APPDIR, 'ui')
 else:
     ROOTDIR = os.path.dirname(__file__)
     APPDIR = ROOTDIR
@@ -47,7 +48,7 @@ else:
     ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../data/icons'))
     AUTOSTART = os.path.join(APPDIR,
                              'instant-lyrics-autostart.desktop')
-
+    UIDIR = os.path.join(APPDIR, 'ui')
 f = open(CHANGELOG, 'r')
 line = f.readline()
 f.close()
@@ -58,4 +59,6 @@ if not is_package():
     VERSION = VERSION + '-src'
 
 ICON = os.path.join(ICONDIR, APP + '.svg')
+SPOTIFY_ICON = os.path.join(ICONDIR, 'spotify-logo-symbolic.svg')
+UIFILE = os.path.join(UIDIR, 'ToolbarInfo.ui')
 APPINDICATOR_ID = 'lyricsappindicator'

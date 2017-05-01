@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
 class Error:
     class NotFound:
         title = 'No lyrics :('
@@ -9,4 +13,5 @@ class Error:
 
     class Spotify:
         title = 'No playing song on spotify'
-        message = unicode("Could not get current spotify song. \n Either spotify is not running or no song is playing on spotify ")
+        message = "Could not get current spotify song. \n Either spotify is\
+ not running or no song is playing on spotify "
