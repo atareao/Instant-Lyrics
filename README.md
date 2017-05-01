@@ -5,12 +5,8 @@ Instantly fetches the lyrics of the currently playing spotify song, or any song,
 A linux application with a very convinient GUI. Build with Python Gtk+3 (gi).
 
 # Screenshot
-![Screenshot](https://cloud.githubusercontent.com/assets/6123105/23824316/3fe58044-069a-11e7-804e-180ea4041002.jpeg)
-
-# Working
-### GIF
-![working](https://cloud.githubusercontent.com/assets/6123105/23824730/e0e0829e-06a1-11e7-8d57-3235c4266f2c.gif)
-
+![Screenshot](https://github.com/kazemnejad/Instant-Lyrics/raw/master/screenshots/01.png)
+![Screenshot](https://github.com/kazemnejad/Instant-Lyrics/raw/master/screenshots/02.png)
 
 # Compatibility
 
@@ -65,11 +61,11 @@ sudo dnf install dbus-python python-gobject libappindicator-gtk3 python2-request
 After you've installed the dependencies, open terminal and go to the directory where you want to install. Enter the commands:
 
 ``` sh
-git clone https://github.com/bhrigu123/Instant-Lyrics.git
+git clone https://github.com/kazemnejad/Instant-Lyrics.git
 
 cd Instant-Lyrics/
 
-python InstantLyrics.py
+python instantlyric.py
 ```
 
 The icon will appear in the system tray (indicator panel). You can start using the application from there.
