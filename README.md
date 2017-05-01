@@ -39,21 +39,21 @@ First, install the requirements:
 ### For Ubuntu/Debian based systems:
 
 ``` sh
-sudo apt install python-gi python-dbus gir1.2-appindicator3-0.1 python-requests python-bs4 python-lxml
+sudo apt install python3-gi python3-dbus gir1.2-appindicator3-0.1 python3-requests python3-lxml
 ```
 
-(requests, lxml and bs4 can be install from `pip` also: `pip install requests lxml beautifiulsoup4`)
+(requests and lxml can be install from `pip` also: `pip install requests lxml beautifiulsoup4`)
 
 ### For Arch users
 
 ``` sh
-sudo pacman -S python2-dbus python2-requests python2-lxml python2-beautifulsoup4 python2-gobject libappindicator-gtk3
+sudo pacman -S python3-dbus python3-requests python3-lxml python3-gobject libappindicator-gtk3
 ```
 
 ### Fedora
 
 ``` sh
-sudo dnf install dbus-python python-gobject libappindicator-gtk3 python2-requests python-beautifulsoup4 python2-lxml
+sudo dnf install dbus-python3 python3-gobject libappindicator-gtk3 python3-requests python3-lxml
 ```
 
 ## Install from source
