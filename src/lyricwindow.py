@@ -52,7 +52,7 @@ class LyricsWindow(Gtk.Window):
         scrolled.add(self.main_box)
 
         self.toolbar = Toolbar(self.on_lyric_requested, self.on_cancel_spotify,
-                               accelerators, scrolled)
+                               self.on_download_lyric, accelerators, scrolled)
         self.set_titlebar(self.toolbar)
 
         self.add(scrolled)
@@ -61,6 +61,27 @@ class LyricsWindow(Gtk.Window):
     def init_spotify_checker(self):
         self.spotify_checker = PeriodicThread(self.load_from_spotify, 0.5)
         self._last_song_hash = ''
+
+    def on_download_lyric(self):
+        dialog = Gtk.FileChooserDialog('Select output file',
+                                       self, Gtk.FileChooserAction.SAVE,
+                                       (Gtk.STOCK_CANCEL,
+                                        Gtk.ResponseType.REJECT,
+                                        Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
+        dialog.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        filter = Gtk.FileFilter()
+        filter.set_name('Text file')
+        filter.add_mime_type('txt/plain')
+        dialog.add_filter(filter)
+        if dialog.run() == Gtk.ResponseType.ACCEPT:
+            dialog.hide()
+            filename = dialog.get_filename()
+            if not filename.endswith('.txt'):
+                filename += '.txt'
+            lyrics = self.lyrics.get_text()
+            with open(filename, 'w') as text_file:
+                text_file.write(lyrics)
+        dialog.destroy()
 
     def on_lyric_requested(self, is_from_spotify, song, artist_name=''):
         if is_from_spotify:
@@ -181,13 +202,14 @@ class LyricsWindow(Gtk.Window):
 
 class Toolbar(Gtk.HeaderBar):
     def __init__(self, lyric_request_callback, cancel_spotify_callback,
-                 accelerators, spinner, **properties):
+                 lyric_download_callback, accelerators, spinner, **properties):
         super(Toolbar, self).__init__(**properties)
         self.set_show_close_button(True)
         self.set_custom_title(None)
 
         self.request_lyric = lyric_request_callback
         self.cancel_spotify = cancel_spotify_callback
+        self.download_lyric = lyric_download_callback
         self.accelerators = accelerators
 
         self.an = Gtk.Entry()
@@ -202,6 +224,9 @@ class Toolbar(Gtk.HeaderBar):
 
         self.btn_spotify = self._create_spotify_btn()
         self.pack_end(self.btn_spotify)
+
+        self.btn_download = self._create_download_btn()
+        self.pack_end(self.btn_download)
 
     def do_escape(self):
         if self.btn_search.get_active():
@@ -233,6 +258,9 @@ class Toolbar(Gtk.HeaderBar):
         else:
             self.show_info_bar()
 
+    def _on_download_btn_clicked(self, widget):
+        self.download_lyric()
+
     def _on_spotify_btn_clicked(self, widget):
         if self.btn_spotify.get_active():
             self.info.clear()
@@ -251,6 +279,15 @@ class Toolbar(Gtk.HeaderBar):
                     unicode(lst[1].strip()) if len(lst) > 1 else '')
                 self.btn_spotify.set_active(False)
                 self.spinner.grab_focus()
+
+    def _create_download_btn(self):
+        btn_download = Gtk.Button()
+        btn_download.add(Gtk.Image.new_from_gicon(
+            Gio.ThemedIcon(name="folder-download-symbolic.symbolic"), Gtk.IconSize.BUTTON))
+        btn_download.connect('clicked', self._on_download_btn_clicked)
+        bind_accelerator(self.accelerators, btn_download, '<Control>d')
+
+        return btn_download
 
     def _create_search_btn(self):
         btn_search = Gtk.ToggleButton()

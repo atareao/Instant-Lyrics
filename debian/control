@@ -13,6 +13,7 @@ Depends: ${misc:Depends}, ${python:Depends},
     python3-gi,
     gir1.2-gtk-3.0,
     python3-lxml,
+    python3-cssselect,
     python3-requests
 Description: Instantly fetches the lyrics of the currently of any song
  Instantly fetches the lyrics of the currently playing spotify song, or any song,

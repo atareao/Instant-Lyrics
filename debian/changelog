@@ -1,3 +1,10 @@
+instant-lyrics (0.3.1-0extras17.04.0) zesty ; urgency=medium
+
+  * added python3-cssselect dependency
+  * added a button to save lyrics
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 20 May 2017 10:09:20 +0200
+
 instant-lyrics (0.3.0-0extras16.04.0) xenial; urgency=medium
 
   * Added Rhytmbox
